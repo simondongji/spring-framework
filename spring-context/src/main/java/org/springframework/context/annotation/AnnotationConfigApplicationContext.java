@@ -77,12 +77,16 @@ public class AnnotationConfigApplicationContext extends GenericApplicationContex
 	}
 
 	/**
+	 * 通过注解读取器初始化Spring环境，传入参数为被 javaconfig注解的配置类
 	 * Create a new AnnotationConfigApplicationContext, deriving bean definitions
 	 * from the given annotated classes and automatically refreshing the context.
 	 * @param annotatedClasses one or more annotated classes,
 	 * e.g. {@link Configuration @Configuration} classes
 	 */
 	public AnnotationConfigApplicationContext(Class<?>... annotatedClasses) {
+		// 先调用父类的构造方法，再调用自己的构造方法
+		//父类的构造方法初始化了beanFactory
+		//自己的构造方法初始化了一个读取器和扫描器
 		this();
 		register(annotatedClasses);
 		refresh();
